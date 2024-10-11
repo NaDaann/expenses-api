@@ -1,0 +1,437 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Onfly API",
+        "description": "Documentação da API criada com Laravel para a Onfly",
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/api/expenses": {
+            "post": {
+                "tags": [
+                    "Expenses"
+                ],
+                "summary": "Criar uma nova despesa",
+                "operationId": "94b6048011dd02edded3d8053b6e77f8",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/ExpensesRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Despesa criada com sucesso",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ExpensesResource"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Erro de validação"
+                    }
+                },
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/expenses/{id}": {
+            "get": {
+                "tags": [
+                    "Expenses"
+                ],
+                "summary": "Mostrar uma despesa específica",
+                "operationId": "b4d5bf793545478c0fb696226f77921f",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Detalhes da despesa",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ExpensesResource"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Despesa não encontrada"
+                    }
+                },
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "Expenses"
+                ],
+                "summary": "Atualizar uma despesa existente",
+                "operationId": "eef5f9786a10ad33c9ef748698cb2c04",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/ExpensesRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Despesa atualizada com sucesso",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ExpensesResource"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Despesa não encontrada"
+                    },
+                    "422": {
+                        "description": "Erro de validação"
+                    }
+                },
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Expenses"
+                ],
+                "summary": "Remover uma despesa existente",
+                "operationId": "2b7a13341029be05a60dd4cce0baf857",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Despesa removida com sucesso"
+                    },
+                    "404": {
+                        "description": "Despesa não encontrada"
+                    }
+                },
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/expenses/all": {
+            "get": {
+                "tags": [
+                    "Expenses"
+                ],
+                "summary": "Mostrar todas as despesas com paginação",
+                "operationId": "c1acb09f5f8feb7934de5deab4fd8b72",
+                "parameters": [
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "Número da página. O padrão é 1.",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "description": "Número de itens por página. O padrão é 10.",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Lista de despesas paginadas",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ExpensesResource"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/user/register": {
+            "post": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Registrar um novo usuário",
+                "operationId": "d03ee3a44bdd6f0025efd14c5c76b5ae",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UserRegisterRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Usuário registrado com sucesso",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/UserResource"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Erro de validação"
+                    }
+                }
+            }
+        },
+        "/api/user/login": {
+            "post": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Login de um usuário existente",
+                "operationId": "9f6f4aca790a5229fb638e798623c6e0",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UserLoginRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Login bem-sucedido",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/UserResource"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Credenciais inválidas"
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "ExpensesRequest": {
+                "title": "Expenses Request",
+                "required": [
+                    "amount",
+                    "description",
+                    "user_id",
+                    "date"
+                ],
+                "properties": {
+                    "amount": {
+                        "description": "O valor da despesa.",
+                        "type": "number",
+                        "format": "float",
+                        "example": 100.5
+                    },
+                    "description": {
+                        "description": "Descrição da despesa.",
+                        "type": "string",
+                        "example": "Compra de materiais"
+                    },
+                    "date": {
+                        "description": "Data da despesa.",
+                        "type": "string",
+                        "format": "date",
+                        "example": "2024-10-09"
+                    }
+                },
+                "type": "object"
+            },
+            "UserLoginRequest": {
+                "title": "User Login Request",
+                "required": [
+                    "email",
+                    "password"
+                ],
+                "properties": {
+                    "email": {
+                        "type": "string",
+                        "format": "email",
+                        "example": "daniel_miranda@example.com"
+                    },
+                    "password": {
+                        "type": "string",
+                        "format": "password",
+                        "example": "password123"
+                    }
+                },
+                "type": "object"
+            },
+            "UserRegisterRequest": {
+                "title": "User Register Request",
+                "required": [
+                    "name",
+                    "email",
+                    "password"
+                ],
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "format": "text",
+                        "example": "Daniel Miranda"
+                    },
+                    "email": {
+                        "type": "string",
+                        "format": "email",
+                        "example": "daniel_miranda@example.com"
+                    },
+                    "password": {
+                        "type": "string",
+                        "format": "password",
+                        "example": "password123"
+                    }
+                },
+                "type": "object"
+            },
+            "ExpensesResource": {
+                "title": "Expenses Resource",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "amount": {
+                        "type": "number",
+                        "format": "float",
+                        "example": 100.5
+                    },
+                    "description": {
+                        "type": "string",
+                        "example": "Compra de materiais"
+                    },
+                    "date": {
+                        "type": "string",
+                        "format": "date",
+                        "example": "2024-10-09"
+                    }
+                },
+                "type": "object"
+            },
+            "UserResource": {
+                "title": "User Resource",
+                "properties": {
+                    "data": {
+                        "properties": {
+                            "user": {
+                                "properties": {
+                                    "id": {
+                                        "type": "integer",
+                                        "example": 1
+                                    },
+                                    "name": {
+                                        "type": "string",
+                                        "format": "text",
+                                        "example": "Daniel Miranda"
+                                    },
+                                    "email": {
+                                        "type": "string",
+                                        "format": "email",
+                                        "example": "daniel_miranda@example.com"
+                                    }
+                                },
+                                "type": "object"
+                            },
+                            "token": {
+                                "type": "string",
+                                "example": "token_string"
+                            }
+                        },
+                        "type": "object"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "securitySchemes": {
+            "Bearer": {
+                "type": "http",
+                "description": "Use o token de autenticação Bearer para acessar os endpoints protegidos",
+                "bearerFormat": "JWT",
+                "scheme": "bearer"
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "Expenses",
+            "description": "Endpoints relacionados a despesas"
+        },
+        {
+            "name": "User",
+            "description": "Endpoints relacionados ao usuário"
+        }
+    ]
+}
